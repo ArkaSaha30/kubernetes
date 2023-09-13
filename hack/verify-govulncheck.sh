@@ -18,9 +18,7 @@ set -euo pipefail
 export WORKDIR=${ARTIFACTS:-$TMPDIR}
 export PATH=$PATH:$GOPATH/bin
 mkdir -p "${WORKDIR}"
-pushd "$WORKDIR"
 go install golang.org/x/vuln/cmd/govulncheck@v1.0.1
-popd
 
 govulncheck -scan module ./... > "${WORKDIR}/head.txt"
 git reset --hard HEAD
